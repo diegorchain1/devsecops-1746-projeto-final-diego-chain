@@ -90,7 +90,7 @@ def admin_users():
 
 
 @bp.post("/admin/users/<int:user_id>/role")
-@auth.login_required("admin")
+@auth.require_role("admin")
 def admin_set_role(user_id):
     role = (request.get_json(silent=True) or {}).get("role")
     if role not in VALID_ROLES:
