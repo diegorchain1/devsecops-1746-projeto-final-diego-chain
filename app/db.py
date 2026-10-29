@@ -55,7 +55,7 @@ def row_to_dict(row):
 
 # ---------------------------------------------------------------- usuários
 
-def create_user(email, password, full_name, role="admin"):
+def create_user(email, password, full_name, role="staff"):
     db = get_db()
     cur = db.execute(
         "INSERT INTO users (email, password_hash, role, full_name) VALUES (?, ?, ?, ?)",
@@ -63,7 +63,7 @@ def create_user(email, password, full_name, role="admin"):
     )
     db.commit()
     return cur.lastrowid
-
+#correção trocando "admin" por "staff" no parâmetro role, para evitar que todos os usuários criados sejam administradores.
 
 def get_user_by_email(email):
     return get_db().execute("SELECT * FROM users WHERE email = ?", (email,)).fetchone()
